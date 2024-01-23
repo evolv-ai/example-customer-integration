@@ -1,15 +1,16 @@
 module.exports = function(config) {
     console.log('Integrations run', config)
 
-    const urlEmitter = (url) => {
-        if (url === 'https://www.evolv.ai/') {
-            evolv.emit('checkout');
+    const webUrl = "web.url";
+    const urlEmitter = (event, key, url) => {
+        if (key === webUrl) {
+            if (url === "https://www.evolv.ai/") {
+                evolv.client.emit("checkout");
+            }
         }
-    }
+    };
 
-    evolv.on('context.value.changed', function (key, value) {
-        if (key === 'web.url') {
-            urlEmitter(value);
-        }
-    });
+    urlEmitter("init", webUrl, evolv.context.get(webUrl));
+    evolv.client.on("context.value.added", urlEmitter);
+    evolv.client.on("context.value.changed", urlEmitter);
 };
