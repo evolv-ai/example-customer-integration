@@ -11,3 +11,5 @@ You can set up cicd process to automate this process when a PR is merged
 * If you have not yet created it, create your integration in Manager (app.evolv.ai)
 * Create an Integration Connector for github, configured for your org, repo, and published tag
 * Add the Integration to you chosen Environment and publish
+
+To update an integration, edit the tag for the Integration, the update to the latest version in your Environment you wish to publish to
